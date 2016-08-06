@@ -28,21 +28,18 @@ var bio = {
   "role" : "Web Developper",
   "age" : 32,
   contacts : {
+    "mobile" : "514-969-6058"
     "email": "fbeausoleil@gmail.com",
     "github": "www.github.com/fbeausoleil",
-    "mobile": "514-969-6058",
+    "twitter": "@ZettaIndustries",
     "location": "Montreal, Quebec"
   },
   "welcome message":"Welcome to my resume",
   "bioPic" : "images/picture.jpg",
 
-  "skills" : ["Cisco", "F5 Big IP", "NX OS","BGP", "DevOps"]
+  "skills" : ["Cisco", "F5 Big IP", "NX OS","BGP", "DevOps"],
+  "display": ""
 }
-
-
-
-
-
 
 
 
@@ -53,9 +50,9 @@ var education = { "schools" :
     "name":"Teccart institute",
     "location":"Montreal, Quebec",
     "degree":"FEWD",
-    "date":"2016",
+    "dates":"2016",
     "url":"www",
-    "majors":[]
+    "majors":["Information technology"]
   }
 
   ],
@@ -66,8 +63,8 @@ var education = { "schools" :
       "date":"2016",
       "url":"www.udacity.com"
     }
-  ]
-
+  ],
+  "display": ""
 
 }
 
@@ -91,7 +88,8 @@ work = { "jobs" :
     }
 
 
-  ]
+  ],
+  display:""
 
 }
 
@@ -110,7 +108,8 @@ projects = { "projects" :
       "description":"test",
       "image":""
     }
-  ]
+  ],
+  display:""
 
 }
 projects.display = function() {
