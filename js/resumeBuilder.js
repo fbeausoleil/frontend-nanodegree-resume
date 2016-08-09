@@ -14,9 +14,9 @@ var bio = {
     "location": "Montreal, Quebec"
   },
   "welcomeMessage":"Welcome to my resume",
-  "bioPic" : "images/fry.jpg",
+  "bioPic" : "images/biopic.jpg",
 
-  "skills" : ["Cisco", "F5 Big IP", "NX OS","BGP", "DevOps"],
+  "skills" : ["Cisco", "F5 Big IP", "NX OS","BGP", "Data Centers"],
   "display": function(){
 
     var formattedName=HTMLheaderName.replace("%data%",bio.name);
@@ -41,6 +41,12 @@ var bio = {
     $("#header").append(formattedMessage);
     $("#header").append(formattedBioPic);
 
+    // contact info bottom of page
+    $("#footerContacts").append(formattedMobile);
+    $("#footerContacts").append(formattedEmail);
+    $("#footerContacts").append(formattedGithub);
+    $("#footerContacts").append(formattedTwitter);
+    $("#footerContacts").append(formattedLocation);
 
 
 
@@ -49,6 +55,7 @@ var bio = {
       for (index in bio.skills) {
         var formattedSkills = HTMLskills.replace("%data%", bio.skills[index]);
         $("#skills-h3").append(formattedSkills);
+
 
       }
     }
@@ -64,23 +71,68 @@ var education = { "schools" :
   [ {
 
     "name":"Teccart institute",
-    "location":"Montreal, Quebec",
-    "degree":"FEWD",
-    "dates":"2016",
+    "location":"Montreal, QC",
+    "degree":"DEC",
+    "dates":"21991-1994",
     "url":"www",
-    "majors":["Information technology"]
+    "majors":["Computer Science"]
   }
 
   ],
   "onlineCourses": [
     {
-      "Title":"FEDW",
+      "title":"Front-end web developper Nanodegree",
       "school":"Udacity",
-      "date":"2016",
+      "dates":"2016",
       "url":"www.udacity.com"
     }
   ],
-  "display": ""
+  "display": function() {
+
+    $("#education").append(HTMLschoolStart);
+    for (index in education.schools) {
+
+      var formattedSchoolName= HTMLschoolName.replace("%data%",education.schools[index].name);
+      var formattedSchoolLocation= HTMLschoolLocation.replace("%data%",education.schools[index].location);
+      var formattedSchoolDegree= HTMLschoolDegree.replace("%data%",education.schools[index].degree);
+      var formattedSchoolDates= HTMLschoolDates.replace("%data%",education.schools[index].dates);
+
+
+
+      $(".education-entry:last").append(formattedSchoolName + formattedSchoolDegree);
+      $(".education-entry:last").append(formattedSchoolLocation);
+      //$(".education-entry").append(formattedSchoolDegree);
+      $(".education-entry:last").append(formattedSchoolDates);
+
+      if (education.schools[index].majors.length >0){
+        for (majorsIndex in education.schools[index].majors){
+          var formattedMajors=HTMLschoolMajor.replace("%data%",education.schools[index].majors[majorsIndex]);
+          $(".education-entry").append(formattedMajors);
+
+        }
+      }
+
+    }
+
+    $("#education").append(HTMLonlineClasses);
+    $("#education").append(HTMLschoolStart);
+
+
+    for (index in education.onlineCourses) {
+      var formattedOnlineTitle=HTMLonlineTitle.replace("%data%",education.onlineCourses[index].title);
+      var formattedOnlineSchool=HTMLonlineSchool.replace("%data%",education.onlineCourses[index].school);
+      var formattedOnlineDates=HTMLonlineDates.replace("%data%",education.onlineCourses[index].dates);
+      var formattedOnlineUrl=HTMLonlineURL.replace("%data%",education.onlineCourses[index].url);
+
+      $(".education-entry:last").append(formattedOnlineTitle + formattedOnlineSchool);
+
+      $(".education-entry:last").append(formattedOnlineDates);
+      $(".education-entry:last").append(formattedOnlineUrl);
+
+    }
+
+
+  }
 
 }
 
@@ -129,6 +181,8 @@ work = { "jobs" :
         $(".work-entry").append(formattedWorkDates);
         $(".work-entry").append(formattedWorkDesc);
 
+
+
       }
 
 
@@ -142,12 +196,12 @@ projects = { "projects" :
       "title":"BBQ island construction",
       "dates":"2015",
       "description":"week-ends project for the construction of the BBQ Island for my new Blaze grill ",
-      "image":["images/bbq1.jpg", "images/bbq2.jpg","images/bbq3.jpg"]
+      "image":["images/bbq1.jpg","images/bbq3.jpg"]
     },
     {
       "title":"Project 2",
       "dates":"2016",
-      "description":"test",
+      "description":"test 1234",
       "image":[""]
     }
   ],
@@ -186,16 +240,5 @@ projects = { "projects" :
 bio.display();
 work.display();
 projects.display();
-$("#main").append(internationalizeButton);
+education.display();
 $("#mapDiv").append(googleMap);
-
-
-
-
-
-
-function inName(intName){
-
-  intName= intName.trim().split(" ");
-  return intName[0].slice(0,1).toUpperCase() +intName[0].slice(1) +" " +intName[1].toUpperCase();
-}
