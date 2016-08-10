@@ -14,14 +14,14 @@ var bio = {
     "location": "Montreal, Quebec"
   },
   "welcomeMessage":"Welcome to my resume",
-  "bioPic" : "images/biopic.jpg",
+  "biopic" : "images/biopic.jpg",
 
   "skills" : ["Cisco", "F5 Big IP", "NX OS","BGP", "Data Centers"],
   "display": function(){
 
     var formattedName=HTMLheaderName.replace("%data%",bio.name);
     var formattedRole =HTMLheaderRole.replace("%data%",bio.role);
-    var formattedBioPic= HTMLbioPic.replace("%data%", bio.bioPic);
+    var formattedBioPic= HTMLbioPic.replace("%data%", bio.biopic);
 
     var formattedMobile=HTMLmobile.replace("%data%",bio.contacts.mobile);
     var formattedEmail=HTMLemail.replace("%data%",bio.contacts.email);
@@ -52,16 +52,16 @@ var bio = {
 
     if (bio.skills.length > 0) {
       $("#header").append(HTMLskillsStart);
-      for (index in bio.skills) {
+      for (index=0;index <  bio.skills.length;index++) {
         var formattedSkills = HTMLskills.replace("%data%", bio.skills[index]);
-        $("#skills-h3").append(formattedSkills);
+        $("#skills").append(formattedSkills);
 
 
       }
     }
 
   }
-}
+};
 
 
 
@@ -85,13 +85,19 @@ var education = { "schools" :
       "school":"Udacity",
       "dates":"2016",
       "url":"www.udacity.com"
+    },
+    {
+      "title":"Introduction to DevOps",
+      "school":"Udacity",
+      "dates":"2016",
+      "url":"www.udacity.com"
     }
   ],
   "display": function() {
 
-    $("#education").append(HTMLschoolStart);
-    for (index in education.schools) {
 
+    for (index=0; index<education.schools.length;index++) {
+      $("#education").append(HTMLschoolStart);
       var formattedSchoolName= HTMLschoolName.replace("%data%",education.schools[index].name);
       var formattedSchoolLocation= HTMLschoolLocation.replace("%data%",education.schools[index].location);
       var formattedSchoolDegree= HTMLschoolDegree.replace("%data%",education.schools[index].degree);
@@ -105,7 +111,7 @@ var education = { "schools" :
       $(".education-entry:last").append(formattedSchoolDates);
 
       if (education.schools[index].majors.length >0){
-        for (majorsIndex in education.schools[index].majors){
+        for (majorsIndex=0;majorsIndex< education.schools[index].majors.length;majorsIndex++){
           var formattedMajors=HTMLschoolMajor.replace("%data%",education.schools[index].majors[majorsIndex]);
           $(".education-entry").append(formattedMajors);
 
@@ -115,10 +121,11 @@ var education = { "schools" :
     }
 
     $("#education").append(HTMLonlineClasses);
-    $("#education").append(HTMLschoolStart);
 
 
-    for (index in education.onlineCourses) {
+
+    for (index=0;index< education.onlineCourses.length;index++) {
+      $("#education").append(HTMLschoolStart);
       var formattedOnlineTitle=HTMLonlineTitle.replace("%data%",education.onlineCourses[index].title);
       var formattedOnlineSchool=HTMLonlineSchool.replace("%data%",education.onlineCourses[index].school);
       var formattedOnlineDates=HTMLonlineDates.replace("%data%",education.onlineCourses[index].dates);
@@ -134,9 +141,9 @@ var education = { "schools" :
 
   }
 
-}
+};
 
-work = { "jobs" :
+var work = { "jobs" :
   [
     {
       "employer":"Bell Canada",
@@ -166,9 +173,9 @@ work = { "jobs" :
 
   ],
   display: function() {
-      $("#workExperience").append(HTMLworkStart);
-      for (index in work.jobs) {
 
+      for (index=0;index< work.jobs.length;index++) {
+        $("#workExperience").append(HTMLworkStart);
         var formattedWorkEmployer= HTMLworkEmployer.replace("%data%",work.jobs[index].employer);
         var formattedWorkTitle= HTMLworkTitle.replace("%data%",work.jobs[index].title);
         var formattedWorkLocation= HTMLworkLocation.replace("%data%",work.jobs[index].location);
@@ -176,10 +183,10 @@ work = { "jobs" :
         var formattedWorkDesc= HTMLworkDescription.replace("%data%",work.jobs[index].description);
 
 
-        $(".work-entry").append(formattedWorkEmployer + formattedWorkTitle);
-        $(".work-entry").append(formattedWorkLocation);
-        $(".work-entry").append(formattedWorkDates);
-        $(".work-entry").append(formattedWorkDesc);
+        $(".work-entry:last").append(formattedWorkEmployer + formattedWorkTitle);
+        $(".work-entry:last").append(formattedWorkLocation);
+        $(".work-entry:last").append(formattedWorkDates);
+        $(".work-entry:last").append(formattedWorkDesc);
 
 
 
@@ -188,26 +195,26 @@ work = { "jobs" :
 
   }
 
-}
+};
 
-projects = { "projects" :
+var projects = { "projects" :
   [
     {
       "title":"BBQ island construction",
       "dates":"2015",
       "description":"week-ends project for the construction of the BBQ Island for my new Blaze grill ",
-      "image":["images/bbq1.jpg","images/bbq3.jpg"]
+      "images":["images/bbq1.jpg","images/bbq3.jpg"]
     },
     {
       "title":"Project 2",
       "dates":"2016",
       "description":"test 1234",
-      "image":[""]
+      "images":[""]
     }
   ],
   display: function() {
      $("#projects").append(HTMLprojectStart);
-     for (index in projects.projects) {
+     for (index=0;index<projects.projects.length;index++) {
 
        formattedTitle=HTMLprojectTitle.replace("%data%", projects.projects[index].title);
        $(".project-entry:last").append(formattedTitle);
@@ -218,9 +225,9 @@ projects = { "projects" :
        formattedDescription=HTMLprojectDescription.replace("%data%", projects.projects[index].description);
        $(".project-entry:last").append(formattedDescription);
 
-       if (projects.projects[index].image.length > 0 ) {
-         for (image in projects.projects[index].image) {
-           var formattedImage= HTMLprojectImage.replace("%data%",projects.projects[index].image[image]);
+       if (projects.projects[index].images.length > 0 ) {
+         for (image=0;image<projects.projects[index].images.length;image++) {
+           var formattedImage= HTMLprojectImage.replace("%data%",projects.projects[index].images[image]);
            $(".project-entry:last").append(formattedImage);
          }
        }
@@ -229,7 +236,7 @@ projects = { "projects" :
 
    }
 
-}
+};
 
 
 
